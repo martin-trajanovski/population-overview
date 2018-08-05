@@ -1,4 +1,4 @@
 export const environment = {
 	production: true,
-	api: 'http://api.population.io/'
+	api: 'https://restcountries.eu/rest/v2'
 };

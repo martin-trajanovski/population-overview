@@ -6,6 +6,7 @@ import { RouterModule, Routes } from '@angular/router';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
+import { NgxDatatableModule } from '@swimlane/ngx-datatable';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -52,6 +53,7 @@ const appRoutes: Routes = [
 	],
 	imports: [
 		BrowserModule,
+		NgxDatatableModule,
 		FormsModule,
 		HttpClientModule,
 		NgProgressModule.forRoot({

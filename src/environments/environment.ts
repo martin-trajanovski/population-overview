@@ -4,7 +4,7 @@
 
 export const environment = {
 	production: false,
-	api: 'http://api.population.io/'
+	api: 'https://restcountries.eu/rest/v2'
 };
 
 /*

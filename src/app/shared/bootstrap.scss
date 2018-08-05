@@ -1,15 +1,8 @@
-.row {
-	input {
-		width: 100%;
-		display: block;
-		background: transparent;
-		border: none;
-		border-bottom: 1px solid #5264AE;
-		border-radius: 0;
-	}
-}
+/*
+bootstrap table theme
+*/
 
-.ngx-datatable {
+.ngx-datatable.bootstrap {
 	box-shadow: none;
 	font-size: 13px;
 
@@ -31,9 +24,6 @@
 			&.datatable-row-even {
 				background-color: rgba(0, 0, 0, 0.05);
 			}
-			&.datatable-row-odd {
-				background-color: rgba(0, 0, 0, 0.2);
-			}
 			&.active {
 				background-color: #1483ff;
 				color: #FFF;
@@ -42,13 +32,6 @@
 				padding: 0.75rem;
 				text-align: left;
 				vertical-align: top;
-			}
-
-			.img-fluid {
-				height: auto;
-				max-height: 25px;
-				width: auto;
-				max-width: 38px;
 			}
 		}
 		.empty-row {
