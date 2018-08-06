@@ -1,6 +1,7 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
 import { CountriesListService } from '../countries-list.service';
 import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { Router } from '@angular/router';
 
 @Component({
 	selector: 'pop-countries-list',
@@ -19,7 +20,7 @@ export class CountriesListComponent implements OnInit {
 
 	@ViewChild(DatatableComponent) table: DatatableComponent;
 
-	constructor(private CountriesService: CountriesListService) { }
+	constructor(private CountriesService: CountriesListService, private router: Router) { }
 
 	ngOnInit() {
 		this.getAllCountries();
@@ -46,6 +47,12 @@ export class CountriesListComponent implements OnInit {
 		this.rows = temp;
 		// Whenever the filter changes, always go back to the first page
 		this.table.offset = 0;
+	}
+
+	onClick(event) {
+		if (event.type === 'click') {
+			this.router.navigate(['/reports', event.row.name]);
+		}
 	}
 
 }

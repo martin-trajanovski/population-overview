@@ -8,7 +8,7 @@ import { environment } from '../../environments/environment';
 })
 export class CountriesListService {
 	countries: Array<object> = [];
-	companiesListUrl = environment.api;
+	countriesPopulationUrl = environment.api_v1;
 
 	constructor(private http: HttpClient) { }
 
@@ -17,7 +17,7 @@ export class CountriesListService {
 			if (this.countries && this.countries.length > 0) {
 				resolve(this.countries);
 			} else {
-				this.http.get(`${this.companiesListUrl}/all`)
+				this.http.get(`${this.countriesPopulationUrl}/all`)
 				.subscribe((result: Array<object>) => {
 					this.countries = result;
 

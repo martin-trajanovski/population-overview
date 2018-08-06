@@ -1,4 +1,5 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
 import { FormsModule } from '@angular/forms';
@@ -7,6 +8,7 @@ import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
 import { ServiceWorkerModule } from '@angular/service-worker';
 import { NgxDatatableModule } from '@swimlane/ngx-datatable';
+import { NgxChartsModule } from '@swimlane/ngx-charts';
 
 import { AppComponent } from './app.component';
 import { HeaderComponent } from './header/header.component';
@@ -53,7 +55,9 @@ const appRoutes: Routes = [
 	],
 	imports: [
 		BrowserModule,
+		BrowserAnimationsModule,
 		NgxDatatableModule,
+		NgxChartsModule,
 		FormsModule,
 		HttpClientModule,
 		NgProgressModule.forRoot({
