@@ -1,5 +1,6 @@
 import { Injectable, OnInit } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { Observable, forkJoin } from 'rxjs';
 
 import { environment } from '../../../environments/environment';
 
@@ -21,5 +22,15 @@ export class CountryDetailService {
 				resolve(this.countryDetails);
 			});
 		});
+	}
+
+	getCountryPopulationGrowthInLastFiveYears(toYear: number, country: string) {
+		const multipleRequestsArray = [];
+
+		for (let i = toYear; i > toYear - 5; i--) {
+			multipleRequestsArray.push(this.http.get(`${this.countryDetailsUrl}/population/${i}/${country}/`));
+		}
+
+		return forkJoin(multipleRequestsArray);
 	}
 }

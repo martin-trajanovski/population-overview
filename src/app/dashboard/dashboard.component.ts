@@ -28,6 +28,21 @@ export class DashboardComponent implements OnInit {
 		domain: ['#A10A28', '#5AA454']
 	};
 
+	// bar chart options
+	fiveCountriesWithHighestRatio: any[] = [];
+
+	showXAxis = true;
+	showYAxis = true;
+	gradient = false;
+	showXAxisLabel = true;
+	xAxisLabel = 'Year';
+	showYAxisLabel = true;
+	yAxisLabel = 'Population';
+
+	colorSchemeBar = {
+		domain: ['#5AA454', '#A10A28']
+	};
+
 	constructor(private CountriesService: CountriesListService, private formBuilder: FormBuilder) { }
 
 	ngOnInit() {
@@ -40,7 +55,6 @@ export class DashboardComponent implements OnInit {
 	}
 
 	private getAllCountries(year: number = 2018, age: number = 20) {
-		// this.highestFemaleToMaleRatio = [];
 		this.CountriesService.getAllCountriesPopulationByYearAndAge(year, age)
 		.then((result: Array<object>) => {
 			this.allCountries = result;
@@ -58,11 +72,37 @@ export class DashboardComponent implements OnInit {
 				}
 			];
 
-			// this.highestFemaleToMaleRatio.push({name: 'Females', value: this.countryWithHighestFemaleMaleRatioByYear.females});
-			// this.highestFemaleToMaleRatio.push({name: 'Males', value: this.countryWithHighestFemaleMaleRatioByYear.males});
+			const tempCountriesArray = [...this.allCountries];
+
+			this.getFiveHighestFemaleMaleRatioCountries(tempCountriesArray);
+		});
+	}
+
+	private getFiveHighestFemaleMaleRatioCountries(countries) {
+		this.fiveCountriesWithHighestRatio = [];
+		for (let i = 0; i < 5; i++) {
+			const countryWithHighestRatio = this.bigestFemaleMaleRatio(countries);
+
+			countries.splice(countries.indexOf(countryWithHighestRatio), 1);
+
+			console.log(countryWithHighestRatio);
+
+			this.fiveCountriesWithHighestRatio.push({
+				name: countryWithHighestRatio.country,
+				series: [
+					{
+						name: 'Males',
+						value: countryWithHighestRatio.males
+					},
+					{
+						name: 'Females',
+						value: countryWithHighestRatio.females
+					}
+				]
+			});
 
 			this.dashboardDetailsLoaded = true;
-		});
+		}
 	}
 
 	bigestFemaleMaleRatio(items: Array<any>) {

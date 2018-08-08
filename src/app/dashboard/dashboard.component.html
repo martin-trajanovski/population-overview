@@ -1,5 +1,5 @@
 <div class="container" *ngIf="dashboardDetailsLoaded">
-	<div class="row criteria-form mb-75">
+	<div class="row criteria-form mb-80">
 		<div class="col-md-12 col-12 p-0">
 			<form [formGroup]="criteriaForm" (ngSubmit)="onSubmit(criteriaForm.value)">
 				<div class="row">
@@ -25,13 +25,24 @@
 		</div>
 	</div>
 	<div class="row">
-		<div class="col-md-12">
+		<div class="col-md-12 col-12">
 			<h6 class="description">Country with highest
-				<span [ngStyle]="{'color': colorScheme.domain[0]}">female</span> to
-				<span [ngStyle]="{'color': colorScheme.domain[1]}">male</span> ratio on age {{countryWithHighestFemaleMaleRatioByYear.age}} for {{countryWithHighestFemaleMaleRatioByYear.year}}
+				<span [ngStyle]="{'color': colorScheme.domain[0]}">Female</span>/
+				<span [ngStyle]="{'color': colorScheme.domain[1]}">Male</span> ratio on age {{countryWithHighestFemaleMaleRatioByYear.age}} for {{countryWithHighestFemaleMaleRatioByYear.year}}
 				is {{countryWithHighestFemaleMaleRatioByYear.country}}.</h6>
 			<ngx-charts-advanced-pie-chart [scheme]="colorScheme" [results]="highestFemaleToMaleRatio" [gradient]="gradient" (select)="onSelect($event)">
 			</ngx-charts-advanced-pie-chart>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-lg-12 col-12 bar-chart">
+			<h6 class="description">
+				Five countries with highest <span [ngStyle]="{'color': colorScheme.domain[0]}">Female</span>/<span [ngStyle]="{'color': colorScheme.domain[1]}">Male</span> ratio on age {{countryWithHighestFemaleMaleRatioByYear.age}} for {{countryWithHighestFemaleMaleRatioByYear.year}}.
+			</h6>
+			<ngx-charts-bar-vertical-2d [scheme]="colorSchemeBar" [results]="fiveCountriesWithHighestRatio" [gradient]="gradient" [xAxis]="showXAxis"
+			 [yAxis]="showYAxis" [legend]="true" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel"
+			 [yAxisLabel]="yAxisLabel" [barPadding]="2" [groupPadding]="8">
+			</ngx-charts-bar-vertical-2d>
 		</div>
 	</div>
 </div>

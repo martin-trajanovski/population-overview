@@ -65,6 +65,10 @@
     
         .advanced-pie-legend-wrapper {
             .advanced-pie-legend {
+                position: absolute;
+                right: 0;
+                width: auto !important;
+
                 @media (max-width: 768px) {
                     margin-left: 60px;
                 }
@@ -72,6 +76,7 @@
                 @media (max-width: 576px) {
                     margin: 0;
                     width: 100% !important;
+                    position: relative;
                 }
             }
     

@@ -1,12 +1,19 @@
 <div class="container" *ngIf="countryDetailsLoaded">
 	<div class="row mt-5">
-		<div class="col-md-12">
+		<div class="col-lg-6 col-12">
 			<h6 class="description">
-				<span [ngStyle]="{'color': colorScheme.domain[0]}">Male</span>/
-				<span [ngStyle]="{'color': colorScheme.domain[1]}">Female</span> ratio for {{country}}.
+				<span [ngStyle]="{'color': colorSchemePie.domain[0]}">Male</span>/
+				<span [ngStyle]="{'color': colorSchemePie.domain[1]}">Female</span> ratio for {{country}}.
 			</h6>
-			<ngx-charts-advanced-pie-chart [scheme]="colorScheme" [results]="maleFemaleRatioData" [gradient]="gradient" (select)="onSelect($event)">
+			<ngx-charts-advanced-pie-chart [scheme]="colorSchemePie" [results]="maleFemaleRatioData" [gradient]="gradient">
 			</ngx-charts-advanced-pie-chart>
+		</div>
+		<div class="col-lg-6 col-12 bar-chart">
+			<h6 class="description">
+				Last five years population growth/fall for {{country}}.
+			</h6>
+			<ngx-charts-bar-vertical [scheme]="colorSchemeBar" [results]="lastFiveYearsPopulation" [gradient]="gradient" [xAxis]="showXAxis" [yAxis]="showYAxis" [showXAxisLabel]="showXAxisLabel" [showYAxisLabel]="showYAxisLabel" [xAxisLabel]="xAxisLabel" [yAxisLabel]="yAxisLabel" [xAxisTickFormatting]="xAxisTickFormatting">
+			</ngx-charts-bar-vertical>
 		</div>
 	</div>
 </div>

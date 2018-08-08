@@ -13,9 +13,24 @@ export class CountryDetailComponent implements OnInit {
 	country: string;
 	countryDetailsLoaded = false;
 
-	// chart options
-	colorScheme = {
+	// pie chart options
+	colorSchemePie = {
 		domain: ['#5AA454', '#A10A28']
+	};
+
+	// bar chart options
+	lastFiveYearsPopulation: any[] = [];
+
+	showXAxis = true;
+	showYAxis = true;
+	gradient = false;
+	showXAxisLabel = true;
+	xAxisLabel = 'Year';
+	showYAxisLabel = true;
+	yAxisLabel = 'Population';
+
+	colorSchemeBar = {
+		domain: ['#5AA454', '#A10A28', '#C7B42C', '#AAAAAA', '#2E86C1']
 	};
 
 	constructor(private activeRoute: ActivatedRoute, private countryService: CountryDetailService) { }
@@ -24,6 +39,8 @@ export class CountryDetailComponent implements OnInit {
 		this.country = this.activeRoute.snapshot.params['countryName'];
 
 		this.getSelectedCountryDetails(this.country);
+
+		this.getCountryPopulationGrowth(2018, this.country);
 	}
 
 	getSelectedCountryDetails(selectedCountry: string) {
@@ -34,9 +51,27 @@ export class CountryDetailComponent implements OnInit {
 
 			this.maleFemaleRatioData.push({name: 'Males', value: sumOfMales});
 			this.maleFemaleRatioData.push({name: 'Females', value: sumOfFemales});
+		});
+	}
 
+	getCountryPopulationGrowth(toYear: number, selectedCountry: string) {
+		this.lastFiveYearsPopulation = [];
+
+		this.countryService.getCountryPopulationGrowthInLastFiveYears(toYear, selectedCountry).subscribe((result) => {
+			result.forEach(element => {
+				const sumOfPopulation = this.populationSum(element, 'total');
+
+				this.lastFiveYearsPopulation.push({
+					name: element[0].year,
+					value: sumOfPopulation
+				});
+			});
 			this.countryDetailsLoaded = true;
 		});
+	}
+
+	xAxisTickFormatting(value): string {
+		return value.toString();
 	}
 
 	populationSum(items: Array<object>, prop: string) {

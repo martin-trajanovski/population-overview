@@ -3,7 +3,7 @@
         .description {
             position: absolute;
             left: 0;
-            top: -45px;
+            top: -55px;
         }
 
         .criteria-form {
@@ -11,8 +11,28 @@
                 background-color: white;
             }
 
-            &.mb-75 {
-                margin-bottom: 75px;
+            &.mb-80 {
+                margin-bottom: 80px;
+            }
+        }
+
+        ngx-charts-advanced-pie-chart {
+            .advanced-pie-legend-wrapper {
+                .advanced-pie-legend {
+                    left: 300px;
+
+                    @media(max-width: 576px) {
+                        left: 0;
+                    }
+                }
+            }
+        }
+
+        .bar-chart {
+            margin-top: 90px;
+
+            @media(max-width: 576px) {
+                margin-top: 290px;
             }
         }
     }

@@ -5,5 +5,16 @@
             left: 0;
             top: -45px;
         }
+
+        .bar-chart {
+            @media (max-width: 1090px) {
+                margin-top: 90px;
+            }
+
+            @media (max-width: 576px) {
+                margin-top: 290px;
+                padding: 0;
+            }
+        }
     }
 }
