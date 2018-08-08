@@ -1,19 +1,19 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewEncapsulation } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CountryDetailService } from './country-detail.service';
 
 @Component({
 	selector: 'pop-country-detail',
 	templateUrl: './country-detail.component.html',
-	styleUrls: ['./country-detail.component.scss']
+	styleUrls: ['./country-detail.component.scss'],
+	encapsulation: ViewEncapsulation.None
 })
 export class CountryDetailComponent implements OnInit {
 	maleFemaleRatioData = [];
+	country: string;
 	countryDetailsLoaded = false;
 
 	// chart options
-	view: any[] = [600, 250];
-
 	colorScheme = {
 		domain: ['#5AA454', '#A10A28']
 	};
@@ -21,9 +21,9 @@ export class CountryDetailComponent implements OnInit {
 	constructor(private activeRoute: ActivatedRoute, private countryService: CountryDetailService) { }
 
 	ngOnInit() {
-		const country = this.activeRoute.snapshot.params['countryName'];
+		this.country = this.activeRoute.snapshot.params['countryName'];
 
-		this.getSelectedCountryDetails(country);
+		this.getSelectedCountryDetails(this.country);
 	}
 
 	getSelectedCountryDetails(selectedCountry: string) {

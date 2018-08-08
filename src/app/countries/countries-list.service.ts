@@ -12,7 +12,7 @@ export class CountriesListService {
 
 	constructor(private http: HttpClient) { }
 
-	getCountries(year: number, age: number) {
+	getAllCountriesPopulationByYearAndAge(year: number, age: number) {
 		return new Promise(resolve => {
 			this.http.get(`${this.countriesPopulationUrl}/population/${year}/aged/${age}`)
 			.subscribe((result: Array<object>) => {

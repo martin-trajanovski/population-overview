@@ -2,7 +2,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 import { HttpClientModule } from '@angular/common/http';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { RouterModule, Routes } from '@angular/router';
 import { NgProgressModule } from '@ngx-progressbar/core';
 import { NgProgressHttpModule } from '@ngx-progressbar/http';
@@ -59,6 +59,7 @@ const appRoutes: Routes = [
 		NgxDatatableModule,
 		NgxChartsModule,
 		FormsModule,
+		ReactiveFormsModule,
 		HttpClientModule,
 		NgProgressModule.forRoot({
 			color: '#c3002f'

@@ -1,7 +1,9 @@
 import { Component, OnInit, ViewEncapsulation, ViewChild } from '@angular/core';
-import { CountriesListService } from '../countries-list.service';
-import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
+
+import { DatatableComponent } from '@swimlane/ngx-datatable';
+import { CountriesListService } from '../countries-list.service';
 
 @Component({
 	selector: 'pop-countries-list',
@@ -12,17 +14,31 @@ import { Router } from '@angular/router';
 export class CountriesListComponent implements OnInit {
 	rows = [];
 	temp = [];
+	criteriaForm: FormGroup;
+
+	// Parameters from population.io
+	minYear = 1950;
+	maxYear = 2100;
+	minAge = 0;
+	maxAge = 100;
 
 	@ViewChild(DatatableComponent) table: DatatableComponent;
 
-	constructor(private CountriesService: CountriesListService, private router: Router) { }
+	constructor(private CountriesService: CountriesListService,
+				private router: Router,
+				private formBuilder: FormBuilder) { }
 
 	ngOnInit() {
 		this.getAllCountries();
+
+		this.criteriaForm = this.formBuilder.group({
+			yearCriteria: [null, [Validators.required, Validators.min(this.minYear), Validators.max(this.maxYear)]],
+			ageCriteria: [null, [Validators.required, Validators.min(this.minAge), Validators.max(this.maxAge)]],
+		});
 	}
 
 	private getAllCountries(year: number = 2018, age: number = 20) {
-		this.CountriesService.getCountries(year, age)
+		this.CountriesService.getAllCountriesPopulationByYearAndAge(year, age)
 		.then((result: Array<object>) => {
 			this.temp = [...result];
 
@@ -50,8 +66,10 @@ export class CountriesListComponent implements OnInit {
 		}
 	}
 
-	onShowNewResultsClick(year: string, age: string) {
-		this.getAllCountries(parseInt(year, 10), parseInt(age, 10));
+	onSubmit({yearCriteria, ageCriteria}) {
+		this.getAllCountries(yearCriteria, ageCriteria);
+
+		this.criteriaForm.reset();
 	}
 
 }

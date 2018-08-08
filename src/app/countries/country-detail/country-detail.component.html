@@ -1,19 +1,11 @@
 <div class="container" *ngIf="countryDetailsLoaded">
-	<div class="row mt-3">
-		<div class="col-md-5 mb-3">
-			
-		</div>
-		<div class="col-md-7">
-			<div class="row">
-				<div class="col-md-12">
-
-				</div>
-			</div>
-		</div>
-	</div>
-	<div class="row mt-3">
+	<div class="row mt-5">
 		<div class="col-md-12">
-			<ngx-charts-advanced-pie-chart [view]="view" [scheme]="colorScheme" [results]="maleFemaleRatioData" [gradient]="gradient" (select)="onSelect($event)">
+			<h6 class="description">
+				<span [ngStyle]="{'color': colorScheme.domain[0]}">Male</span>/
+				<span [ngStyle]="{'color': colorScheme.domain[1]}">Female</span> ratio for {{country}}.
+			</h6>
+			<ngx-charts-advanced-pie-chart [scheme]="colorScheme" [results]="maleFemaleRatioData" [gradient]="gradient" (select)="onSelect($event)">
 			</ngx-charts-advanced-pie-chart>
 		</div>
 	</div>

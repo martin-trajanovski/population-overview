@@ -1,3 +1,37 @@
-<p>
-  dashboard works!
-</p>
+<div class="container" *ngIf="dashboardDetailsLoaded">
+	<div class="row criteria-form mb-75">
+		<div class="col-md-12 col-12 p-0">
+			<form [formGroup]="criteriaForm" (ngSubmit)="onSubmit(criteriaForm.value)">
+				<div class="row">
+					<div class="col-sm-2 col-12">
+						<h6 class="pt-4">Results for</h6>
+					</div>
+					<div class="col-sm-3 col-12">
+						<label for="yearCriteria">New year criteria</label>
+						<input type="number" id="yearCriteria" class="form-control" placeholder="New year" formControlName="yearCriteria" />
+					</div>
+					<div class="col-sm-1 col-12">
+						<h6 class="pt-4">at</h6>
+					</div>
+					<div class="col-sm-3 col-12">
+						<label for="ageCriteria">New age criteria</label>
+						<input type="number" id="ageCriteria" class="form-control" placeholder="New age" formControlName="ageCriteria" />
+					</div>
+					<div class="col-sm-3 col-12">
+						<button type="submit" class="btn btn-primary align-bottom" [disabled]="!criteriaForm.valid">Show results</button>
+					</div>
+				</div>
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<h6 class="description">Country with highest
+				<span [ngStyle]="{'color': colorScheme.domain[0]}">female</span> to
+				<span [ngStyle]="{'color': colorScheme.domain[1]}">male</span> ratio on age {{countryWithHighestFemaleMaleRatioByYear.age}} for {{countryWithHighestFemaleMaleRatioByYear.year}}
+				is {{countryWithHighestFemaleMaleRatioByYear.country}}.</h6>
+			<ngx-charts-advanced-pie-chart [scheme]="colorScheme" [results]="highestFemaleToMaleRatio" [gradient]="gradient" (select)="onSelect($event)">
+			</ngx-charts-advanced-pie-chart>
+		</div>
+	</div>
+</div>

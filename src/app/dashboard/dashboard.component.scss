@@ -1,0 +1,19 @@
+.container {
+    .row {
+        .description {
+            position: absolute;
+            left: 0;
+            top: -45px;
+        }
+
+        .criteria-form {
+            .row {
+                background-color: white;
+            }
+
+            &.mb-75 {
+                margin-bottom: 75px;
+            }
+        }
+    }
+}
