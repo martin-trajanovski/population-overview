@@ -8,7 +8,7 @@ import { environment } from '../../../environments/environment';
 })
 export class CountryDetailService {
 	countryDetails = {};
-	countryDetailsUrl = environment.api_v2;
+	countryDetailsUrl = environment.api;
 
 	constructor(private http: HttpClient) { }
 

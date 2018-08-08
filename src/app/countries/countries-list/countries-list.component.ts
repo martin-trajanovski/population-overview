@@ -12,11 +12,6 @@ import { Router } from '@angular/router';
 export class CountriesListComponent implements OnInit {
 	rows = [];
 	temp = [];
-	columns = [
-		{ prop: 'name' },
-		{ name: 'Population' },
-		{ name: 'Flag' }
-	];
 
 	@ViewChild(DatatableComponent) table: DatatableComponent;
 
@@ -26,8 +21,8 @@ export class CountriesListComponent implements OnInit {
 		this.getAllCountries();
 	}
 
-	private getAllCountries() {
-		this.CountriesService.getCountries()
+	private getAllCountries(year: number = 2018, age: number = 20) {
+		this.CountriesService.getCountries(year, age)
 		.then((result: Array<object>) => {
 			this.temp = [...result];
 
@@ -40,7 +35,7 @@ export class CountriesListComponent implements OnInit {
 
 		// filter our data
 		const temp = this.temp.filter(function(d) {
-			return d.name.toLowerCase().indexOf(val) !== -1 || !val;
+			return d.country.toLowerCase().indexOf(val) !== -1 || !val;
 		});
 
 		// update the rows
@@ -49,10 +44,14 @@ export class CountriesListComponent implements OnInit {
 		this.table.offset = 0;
 	}
 
-	onClick(event) {
+	onCountryRowClick(event) {
 		if (event.type === 'click') {
-			this.router.navigate(['/reports', event.row.name]);
+			this.router.navigate(['/reports', event.row.country]);
 		}
+	}
+
+	onShowNewResultsClick(year: string, age: string) {
+		this.getAllCountries(parseInt(year, 10), parseInt(age, 10));
 	}
 
 }

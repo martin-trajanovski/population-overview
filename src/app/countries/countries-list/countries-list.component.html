@@ -1,7 +1,19 @@
 <div>
 	<div class="row">
-		<div class="col-sm-6 offset-sm-3 col-12">
-			<input type="text" class="form-control" placeholder="Type to filter the name column..." (keyup)='updateFilter($event)' />
+		<div class="col-sm-4 col-12">
+			<label for="searchInput">Search by name</label>
+			<input type="text" name="searchInput" class="form-control" placeholder="Type to filter the name column..." (keyup)='updateFilter($event)' />
+		</div>
+		<div class="col-sm-3 col-12">
+			<label for="yearInput">Year</label>
+			<input #yearValue type="number" name="yearInput" min="1950" max="2100" class="form-control" placeholder="New year" />
+		</div>
+		<div class="col-sm-2 col-12">
+			<label for="ageInput">Age</label>
+			<input #ageValue type="number" name="ageInput" min="0" max="100" class="form-control" placeholder="New age" />
+		</div>
+		<div class="col-sm-3 col-12">
+			<button type="button" class="btn btn-primary align-bottom" (click)="onShowNewResultsClick(yearValue.value, ageValue.value)">Show results</button>
 		</div>
 	</div>
 	<ngx-datatable #table [columnMode]="'force'"
@@ -10,22 +22,28 @@
 		[rowHeight]="46"
 		[limit]="10"
 		[rows]="rows"
-		(activate)="onClick($event)">
-		<ngx-datatable-column name="Flag">
+		(activate)="onCountryRowClick($event)">
+		<ngx-datatable-column name="Country">
 			<ng-template let-row="row" ngx-datatable-cell-template>
-				<img [src]="row.flag" class="img-fluid" alt="">
+				{{row.country}}
 			</ng-template>
 		</ngx-datatable-column>
 
-		<ngx-datatable-column name="Name">
+		<ngx-datatable-column name="Year">
 			<ng-template let-row="row" ngx-datatable-cell-template>
-				{{row.name}}
+				{{row.year}}
 			</ng-template>
 		</ngx-datatable-column>
 
-		<ngx-datatable-column name="Population">
+		<ngx-datatable-column name="Age">
 			<ng-template let-row="row" ngx-datatable-cell-template>
-				{{row.population | number}}
+				{{row.age}}
+			</ng-template>
+		</ngx-datatable-column>
+
+		<ngx-datatable-column name="Total">
+			<ng-template let-row="row" ngx-datatable-cell-template>
+				{{row.total | number}}
 			</ng-template>
 		</ngx-datatable-column>
 	</ngx-datatable>

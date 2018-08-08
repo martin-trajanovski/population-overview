@@ -8,22 +8,18 @@ import { environment } from '../../environments/environment';
 })
 export class CountriesListService {
 	countries: Array<object> = [];
-	countriesPopulationUrl = environment.api_v1;
+	countriesPopulationUrl = environment.api;
 
 	constructor(private http: HttpClient) { }
 
-	getCountries() {
+	getCountries(year: number, age: number) {
 		return new Promise(resolve => {
-			if (this.countries && this.countries.length > 0) {
-				resolve(this.countries);
-			} else {
-				this.http.get(`${this.countriesPopulationUrl}/all`)
-				.subscribe((result: Array<object>) => {
-					this.countries = result;
+			this.http.get(`${this.countriesPopulationUrl}/population/${year}/aged/${age}`)
+			.subscribe((result: Array<object>) => {
+				this.countries = result;
 
-					resolve(this.countries);
-				});
-			}
+				resolve(this.countries);
+			});
 		});
 	}
 }
